@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V Sudeep — Data Analyst</title>
+<meta name="description" content="V Sudeep — Data Analyst portfolio. Python, SQL, Power BI, Tableau, Machine Learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F7F6;
+    --surface:#FFFFFF;
+    --ink:#12191B;
+    --ink-soft:#57666A;
+    --ink-faint:#8A9599;
+    --accent:#0E6B5C;
+    --accent-dark:#0A4F44;
+    --accent-warm:#DDA43A;
+    --line:#DCE3E1;
+    --terminal-bg:#101615;
+    --terminal-ink:#E7F3EF;
+    --radius:10px;
+    --radius-lg:16px;
+    --maxw:1120px;
+    --shadow: 0 1px 2px rgba(18,25,27,0.04), 0 8px 24px -12px rgba(18,25,27,0.12);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  a{color:inherit;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(245,247,246,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    height:68px;
+  }
+  .logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:0.95rem;
+    letter-spacing:0.02em;
+    text-decoration:none;
+    color:var(--ink);
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); display:inline-block;}
+
+  nav.links{display:flex; align-items:center; gap:28px;}
+  nav.links a{
+    text-decoration:none;
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    position:relative;
+    padding:4px 0;
+    transition:color 0.2s ease;
+  }
+  nav.links a.active, nav.links a:hover{color:var(--ink);}
+  nav.links a.active::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:-4px;
+    height:2px; background:var(--accent); border-radius:2px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.88rem;
+    padding:10px 18px;
+    border-radius:999px;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-primary:hover{background:var(--accent-dark); transform:translateY(-1px);}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--ink-soft); transform:translateY(-1px);}
+  .btn-sm{padding:8px 14px; font-size:0.82rem;}
+
+  .nav-cta{display:flex; align-items:center; gap:12px;}
+
+  .hamburger{
+    display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:8px;
+  }
+  .hamburger span{width:22px; height:2px; background:var(--ink); border-radius:2px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:150px 0 90px;
+    background-image:
+      radial-gradient(circle, rgba(14,107,92,0.09) 1px, transparent 1px);
+    background-size:22px 22px;
+    background-position:-8px -8px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    color:var(--accent-dark);
+    background:rgba(14,107,92,0.09);
+    padding:6px 12px;
+    border-radius:6px;
+    margin-bottom:20px;
+  }
+  .eyebrow::before{content:"▍"; color:var(--accent);}
+  .hero h1{
+    font-size:clamp(2.1rem, 4.2vw, 3.4rem);
+    font-weight:700;
+    line-height:1.12;
+    margin-bottom:20px;
+  }
+  .hero h1 .accent-text{color:var(--accent);}
+  .hero p.lede{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    max-width:520px;
+    margin-bottom:32px;
+  }
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
+  .social-row{display:flex; gap:14px; align-items:center;}
+  .social-row a{
+    width:38px; height:38px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--line); color:var(--ink-soft);
+    transition:all 0.2s ease;
+  }
+  .social-row a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px);}
+  .social-row svg{width:17px; height:17px;}
+
+  /* dashboard card */
+  .dash-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);
+    padding:22px;
+  }
+  .dash-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+  .dash-title{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--ink-faint); letter-spacing:0.04em; text-transform:uppercase;}
+  .dash-live{display:flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--accent);}
+  .dash-live .pulse{width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(14,107,92,0.5);} 70%{box-shadow:0 0 0 7px rgba(14,107,92,0);} 100%{box-shadow:0 0 0 0 rgba(14,107,92,0);}}
+
+  .stat-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:18px;}
+  .stat{
+    background:var(--bg); border:1px solid var(--line); border-radius:var(--radius);
+    padding:14px 14px;
+  }
+  .stat .num{font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:1.35rem; color:var(--ink);}
+  .stat .label{font-size:0.76rem; color:var(--ink-soft); margin-top:2px;}
+
+  .chart-wrap{border:1px solid var(--line); border-radius:var(--radius); padding:14px; background:var(--bg);}
+  .chart-wrap .cap{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--ink-faint); margin-bottom:8px; display:flex; justify-content:space-between;}
+  #sparkline path.line{
+    fill:none; stroke:var(--accent); stroke-width:2.4;
+    stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:400; stroke-dashoffset:400;
+    animation:draw 1.6s ease forwards 0.4s;
+  }
+  #sparkline path.area{ fill:url(#areaFill); opacity:0; animation:fadein 1s ease forwards 1.4s; }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes fadein{to{opacity:1;}}
+  #sparkline circle.pt{
+    fill:var(--accent-warm); opacity:0;
+    animation:fadein 0.4s ease forwards;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:96px 0;}
+  section.alt{background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .section-head{margin-bottom:44px; max-width:640px;}
+  .section-head h2{font-size:clamp(1.6rem, 2.6vw, 2.1rem); margin-bottom:10px;}
+  .section-head p{color:var(--ink-soft); font-size:1rem;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;}
+  .avatar-block{display:flex; align-items:center; gap:18px; margin-bottom:22px;}
+  .avatar{
+    width:64px; height:64px; border-radius:50%;
+    background:conic-gradient(from 200deg, var(--accent), var(--accent-warm), var(--accent));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif; font-weight:700; color:#fff; font-size:1.3rem;
+    flex-shrink:0;
+  }
+  .about-copy p{color:var(--ink-soft); margin:0 0 16px;}
+  .about-copy strong{color:var(--ink);}
+
+  .terminal{
+    background:var(--terminal-bg); border-radius:var(--radius-lg);
+    overflow:hidden; box-shadow:var(--shadow);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:7px;
+    padding:12px 16px; background:#181F1E;
+  }
+  .terminal-bar span{width:10px; height:10px; border-radius:50%;}
+  .terminal-bar span:nth-child(1){background:#EF6A5F;}
+  .terminal-bar span:nth-child(2){background:#F5BE4F;}
+  .terminal-bar span:nth-child(3){background:#61C454;}
+  .terminal-bar .path{margin-left:10px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:#7C8F8B;}
+  .terminal-body{padding:22px 22px 26px; font-family:'IBM Plex Mono', monospace; font-size:0.86rem; color:var(--terminal-ink); line-height:1.9;}
+  .terminal-body .prompt{color:var(--accent-warm);}
+  .terminal-body .key{color:#7FD8C4;}
+  .terminal-body .cursor{display:inline-block; width:7px; height:15px; background:var(--terminal-ink); vertical-align:middle; animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
+  .skill-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:24px; transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .skill-card:hover{transform:translateY(-3px); box-shadow:var(--shadow);}
+  .skill-card h3{font-size:1.02rem; margin-bottom:14px; display:flex; align-items:center; gap:9px;}
+  .skill-card h3 .ic{width:8px; height:8px; border-radius:2px; background:var(--accent); display:inline-block; transform:rotate(45deg);}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem;
+    background:var(--bg); border:1px solid var(--line); color:var(--ink-soft);
+    padding:5px 10px; border-radius:6px;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .project-list{display:flex; flex-direction:column; gap:20px;}
+  .project-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:30px; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:start;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .project-card:hover{transform:translateY(-2px); box-shadow:var(--shadow);}
+  .project-top{display:flex; align-items:center; gap:14px; margin-bottom:10px; flex-wrap:wrap;}
+  .project-top h3{font-size:1.2rem;}
+  .badge-metric{
+    font-family:'IBM Plex Mono', monospace; font-size:0.74rem; font-weight:600;
+    color:var(--accent-dark); background:rgba(14,107,92,0.1);
+    padding:4px 10px; border-radius:999px;
+  }
+  .project-card ul{margin:14px 0 16px; padding-left:20px; color:var(--ink-soft); font-size:0.94rem;}
+  .project-card li{margin-bottom:6px;}
+  .project-links{display:flex; gap:10px; align-self:start;}
+  .icon-btn{
+    width:40px; height:40px; border-radius:50%; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; color:var(--ink-soft);
+    transition:all 0.2s ease; flex-shrink:0;
+  }
+  .icon-btn:hover{border-color:var(--accent); color:var(--accent);}
+  .icon-btn svg{width:17px; height:17px;}
+
+  @media (max-width:720px){
+    .project-card{grid-template-columns:1fr;}
+    .project-links{align-self:flex-start;}
+  }
+
+  /* ---------- CERTIFICATES ---------- */
+  .cert-list{display:flex; flex-direction:column; gap:14px;}
+  .cert-row{
+    display:flex; align-items:center; gap:18px;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 22px;
+  }
+  .cert-icon{
+    width:44px; height:44px; border-radius:10px; background:rgba(221,164,58,0.16);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--accent-warm);
+  }
+  .cert-icon svg{width:20px; height:20px;}
+  .cert-text h3{font-size:0.98rem; margin-bottom:3px;}
+  .cert-text p{margin:0; color:var(--ink-soft); font-size:0.86rem;}
+
+  /* ---------- RESUME CTA ---------- */
+  .resume-band{
+    background:linear-gradient(120deg, var(--accent-dark), var(--accent));
+    border-radius:var(--radius-lg);
+    padding:44px 44px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px;
+    color:#EFFAF6;
+    flex-wrap:wrap;
+  }
+  .resume-band h2{color:#fff; font-size:1.5rem; margin-bottom:8px;}
+  .resume-band p{color:#CDEFE4; margin:0; max-width:440px;}
+  .resume-band .btn-primary{background:#fff; color:var(--accent-dark);}
+  .resume-band .btn-primary:hover{background:#EFFAF6;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px;}
+  .contact-info-list{display:flex; flex-direction:column; gap:16px; margin-top:24px;}
+  .contact-info-row{display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--ink);}
+  .contact-info-row .ic{
+    width:42px; height:42px; border-radius:10px; background:var(--bg); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0;
+  }
+  .contact-info-row .ic svg{width:18px; height:18px;}
+  .contact-info-row .txt small{display:block; color:var(--ink-faint); font-size:0.76rem; font-family:'IBM Plex Mono', monospace;}
+  .contact-info-row:hover .txt{color:var(--accent);}
+
+  form.contact-form{display:flex; flex-direction:column; gap:16px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field label{font-size:0.82rem; font-family:'IBM Plex Mono', monospace; color:var(--ink-soft);}
+  .field input, .field textarea{
+    font-family:'Inter', sans-serif; font-size:0.94rem;
+    padding:12px 14px; border-radius:8px; border:1px solid var(--line);
+    background:var(--surface); color:var(--ink); resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--accent);}
+  .field .err{color:#C64B3C; font-size:0.78rem; min-height:1em;}
+  .form-msg{font-size:0.88rem; font-family:'IBM Plex Mono', monospace; color:var(--accent-dark); min-height:1.2em;}
+
+  footer{
+    padding:36px 0; border-top:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;
+  }
+  footer .foot-logo{font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--ink-soft);}
+  footer .foot-links{display:flex; gap:18px;}
+  footer .foot-links a{font-size:0.85rem; color:var(--ink-soft); text-decoration:none;}
+  footer .foot-links a:hover{color:var(--accent);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 940px){
+    .hero-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 720px){
+    nav.links, .nav-cta .btn-ghost{display:none;}
+    .hamburger{display:flex;}
+    .skills-grid{grid-template-columns:1fr;}
+    .resume-band{flex-direction:column; align-items:flex-start;}
+  }
+
+  nav.links.mobile-open{
+    display:flex; position:absolute; top:68px; left:0; right:0;
+    flex-direction:column; background:var(--surface); border-bottom:1px solid var(--line);
+    padding:18px 28px; gap:18px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo"><span class="dot"></span>V.SUDEEP</a>
+    <nav class="links" id="navLinks">
+      <a href="#about" data-nav>About</a>
+      <a href="#skills" data-nav>Skills</a>
+      <a href="#projects" data-nav>Projects</a>
+      <a href="#certificates" data-nav>Certificates</a>
+      <a href="#contact" data-nav>Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="resume.pdf" download class="btn btn-ghost btn-sm">Resume ↓</a>
+      <a href="#contact" class="btn btn-primary btn-sm">Get in touch</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow mono">$ whoami --role data-analyst</span>
+        <h1>Turning raw data into <span class="accent-text">decisions</span> that hold up in the room.</h1>
+        <p class="lede">I'm V Sudeep, an aspiring Data Analyst who builds the dashboards, models, and reports that consulting and analytics teams actually act on — from attrition prediction to sales performance to secure systems.</p>
+        <div class="hero-actions">
+          <a href="resume.pdf" download class="btn btn-primary">Download Resume</a>
+          <a href="#projects" class="btn btn-ghost">View Projects</a>
+        </div>
+        <div class="social-row">
+          <a href="https://github.com/v-sudeep" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.93c.57.1.79-.25.79-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.29-1.69-1.29-1.69-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.78 2.72 1.26 3.38.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/v-sudeep-32a195292" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+          </a>
+          <a href="mailto:vsudeee1129@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="dash-card" aria-hidden="false">
+        <div class="dash-head">
+          <span class="dash-title">impact_summary</span>
+          <span class="dash-live"><span class="pulse"></span>LIVE</span>
+        </div>
+        <div class="stat-grid">
+          <div class="stat"><div class="num">87%</div><div class="label">attrition model accuracy</div></div>
+          <div class="stat"><div class="num">20K+</div><div class="label">orders analyzed</div></div>
+          <div class="stat"><div class="num">₹70M+</div><div class="label">revenue covered</div></div>
+          <div class="stat"><div class="num">8K+</div><div class="label">customers profiled</div></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="cap"><span>model_accuracy.trend</span><span>Q1 → Q4</span></div>
+          <svg id="sparkline" viewBox="0 0 320 90" width="100%" height="90">
+            <defs>
+              <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0E6B5C" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#0E6B5C" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path class="area" d="M0,70 L40,62 L80,66 L120,44 L160,50 L200,30 L240,34 L280,14 L320,18 L320,90 L0,90 Z"/>
+            <path class="line" d="M0,70 L40,62 L80,66 L120,44 L160,50 L200,30 L240,34 L280,14 L320,18"/>
+            <circle class="pt" cx="320" cy="18" r="4" style="animation-delay:1.9s"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow mono">$ cat about.md</span>
+        <h2>About Me</h2>
+        <p>The short version, and the version with the details.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <div class="avatar-block">
+            <div class="avatar">VS</div>
+            <div>
+              <h3 style="font-size:1.1rem;">V Sudeep</h3>
+              <p style="margin:0; color:var(--ink-soft); font-size:0.9rem;">Data Analyst · Bengaluru, India</p>
+            </div>
+          </div>
+          <p>I'm an aspiring <strong>Data Analyst and Computer Science Engineer</strong> who enjoys the part of analytics most people skip past: getting the data clean enough, and the story clear enough, that a business actually changes course because of it.</p>
+          <p>My work spans <strong>Python, SQL, Power BI, and Tableau</strong>, with a growing focus on <strong>machine learning for prediction</strong> — from forecasting employee attrition to unpacking what actually drives e-commerce revenue. I like dashboards that answer the next three questions someone will ask, not just the first one.</p>
+          <p>Outside of dashboards, I co-authored a published research paper on a blockchain-based voting system — proof that I'm as comfortable with cryptographic protocols as I am with a pivot table.</p>
+        </div>
+        <div class="terminal reveal">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <span class="path">~/sudeep — zsh</span>
+          </div>
+          <div class="terminal-body">
+            <div><span class="prompt">$</span> whoami --details</div>
+            <div><span class="key">name</span>: V Sudeep</div>
+            <div><span class="key">role</span>: Aspiring Data Analyst (Fresher)</div>
+            <div><span class="key">based_in</span>: Bengaluru, India</div>
+            <div><span class="key">education</span>: B.E. Computer Science & Engineering, 2026</div>
+            <div><span class="key">focus</span>: EDA · Predictive Modeling · BI Dashboards</div>
+            <div><span class="key">currently</span>: Data Analytics Intern @ Dyashin Technosoft</div>
+            <div><span class="key">status</span>: Open to entry-level Data Analyst roles<span class="cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow mono">$ skills --list</span>
+        <h2>Skills</h2>
+        <p>The stack I use to move from raw tables to recommendations.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <h3><span class="ic"></span>Programming & Querying</h3>
+          <div class="chip-row">
+            <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span>
+            <span class="chip">Scikit-Learn</span><span class="chip">SQL</span><span class="chip">Window Functions</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3><span class="ic"></span>BI & Visualization</h3>
+          <div class="chip-row">
+            <span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">Excel</span>
+            <span class="chip">Plotly</span><span class="chip">Matplotlib</span><span class="chip">Streamlit</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3><span class="ic"></span>Machine Learning</h3>
+          <div class="chip-row">
+            <span class="chip">EDA</span><span class="chip">XGBoost</span><span class="chip">Regression</span>
+            <span class="chip">Feature Engineering</span><span class="chip">Model Evaluation</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3><span class="ic"></span>Business & Reporting</h3>
+          <div class="chip-row">
+            <span class="chip">KPI Reporting</span><span class="chip">Data Storytelling</span>
+            <span class="chip">Stakeholder Comms</span><span class="chip">Dashboard Design</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3><span class="ic"></span>Tools & Platforms</h3>
+          <div class="chip-row">
+            <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Jupyter</span>
+            <span class="chip">Data Cleaning</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3><span class="ic"></span>Currently Learning</h3>
+          <div class="chip-row">
+            <span class="chip">A/B Testing</span><span class="chip">Cloud (AWS)</span><span class="chip">Advanced SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow mono">$ projects --all</span>
+        <h2>Projects</h2>
+        <p>A few things I've shipped end-to-end, from raw data to recommendation.</p>
+      </div>
+      <div class="project-list">
+
+        <article class="project-card reveal">
+          <div>
+            <div class="project-top">
+              <h3>HR Analytics AI Dashboard</h3>
+              <span class="badge-metric">87% accuracy</span>
+            </div>
+            <div class="chip-row" style="margin-bottom:4px;">
+              <span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">XGBoost</span><span class="chip">EDA</span>
+            </div>
+            <ul>
+              <li>Designed and deployed an end-to-end HR analytics dashboard for real-time attrition risk visibility.</li>
+              <li>Ran data cleaning, EDA, and feature engineering to isolate key attrition drivers.</li>
+              <li>Tuned an XGBoost classifier to 87% prediction accuracy to support retention planning.</li>
+            </ul>
+          </div>
+          <div class="project-links">
+            <a class="icon-btn" href="https://github.com/v-sudeep" target="_blank" rel="noopener" aria-label="View code on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.93c.57.1.79-.25.79-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.29-1.69-1.29-1.69-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.78 2.72 1.26 3.38.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div>
+            <div class="project-top">
+              <h3>E-Commerce Sales Performance Analysis</h3>
+              <span class="badge-metric">₹70M+ analyzed</span>
+            </div>
+            <div class="chip-row" style="margin-bottom:4px;">
+              <span class="chip">Power BI</span><span class="chip">DAX</span><span class="chip">Data Modeling</span>
+            </div>
+            <ul>
+              <li>Built an interactive Power BI dashboard covering 20,000+ orders and 8,000+ customers.</li>
+              <li>Shipped KPI, segmentation, and operational analytics reports used to steer business strategy.</li>
+              <li>Turned findings into recommendations for customer retention and delivery performance.</li>
+            </ul>
+          </div>
+          <div class="project-links">
+            <a class="icon-btn" href="https://github.com/v-sudeep" target="_blank" rel="noopener" aria-label="View code on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.93c.57.1.79-.25.79-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.29-1.69-1.29-1.69-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.78 2.72 1.26 3.38.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div>
+            <div class="project-top">
+              <h3>Blockchain-Based Electronic Voting System</h3>
+              <span class="badge-metric">Published paper</span>
+            </div>
+            <div class="chip-row" style="margin-bottom:4px;">
+              <span class="chip">Blockchain</span><span class="chip">Cryptography</span><span class="chip">Python</span>
+            </div>
+            <ul>
+              <li>Designed a decentralized voting system to protect data integrity and voter privacy.</li>
+              <li>Built a tamper-resistant mechanism supporting anonymous, independently verifiable ballots.</li>
+              <li>Co-authored a research paper documenting the system's architecture and security model.</li>
+            </ul>
+          </div>
+          <div class="project-links">
+            <a class="icon-btn" href="https://github.com/v-sudeep" target="_blank" rel="noopener" aria-label="View code on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.93c.57.1.79-.25.79-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.29-1.69-1.29-1.69-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.78 2.72 1.26 3.38.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates" class="alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow mono">$ certifications --show</span>
+        <h2>Certificates</h2>
+        <p>Formal credentials and published work.</p>
+      </div>
+      <div class="cert-list">
+        <div class="cert-row reveal">
+          <div class="cert-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div class="cert-text">
+            <h3>Python Essentials 1</h3>
+            <p>Cisco Networking Academy</p>
+          </div>
+        </div>
+        <div class="cert-row reveal">
+          <div class="cert-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+          </div>
+          <div class="cert-text">
+            <h3>Published Research Paper</h3>
+            <p>"Blockchain-Based Electronic Voting System"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME BAND -->
+  <section>
+    <div class="wrap">
+      <div class="resume-band reveal">
+        <div>
+          <h2>Want the full picture?</h2>
+          <p>Download the one-page version of my resume — education, experience, and every project, condensed.</p>
+        </div>
+        <a href="resume.pdf" download class="btn btn-primary">Download Resume (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow mono">$ contact --info</span>
+        <h2>Contact</h2>
+        <p>Have a role, a project, or just a question? I'd like to hear from you.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="contact-info-list">
+            <a class="contact-info-row" href="mailto:vsudeee1129@gmail.com">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg></span>
+              <span class="txt"><small>Email</small>vsudeee1129@gmail.com</span>
+            </a>
+            <a class="contact-info-row" href="tel:+918310267800">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></span>
+              <span class="txt"><small>Phone</small>+91 83102 67800</span>
+            </a>
+            <a class="contact-info-row" href="https://www.linkedin.com/in/v-sudeep-32a195292" target="_blank" rel="noopener">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></span>
+              <span class="txt"><small>LinkedIn</small>v-sudeep-32a195292</span>
+            </a>
+            <a class="contact-info-row" href="https://github.com/v-sudeep" target="_blank" rel="noopener">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.93c.57.1.79-.25.79-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.29-1.69-1.29-1.69-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.78 2.72 1.26 3.38.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.07.78 2.16v3.2c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></span>
+              <span class="txt"><small>GitHub</small>github.com/v-sudeep</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+              <div class="err" id="nameErr"></div>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+              <div class="err" id="emailErr"></div>
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+              <div class="err" id="messageErr"></div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+            <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; width:100%;">
+    <span class="foot-logo mono">© <span id="year"></span> V Sudeep — built with HTML, CSS & JS</span>
+    <div class="foot-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="resume.pdf" download>Resume</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('mobile-open');
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('mobile-open'));
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('nav.links a[data-nav]');
+  const setActive = () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 120 && rect.bottom >= 120) current = sec.id;
+    });
+    navAnchors.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  };
+  document.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Contact form: client-side validation + mailto handoff (static site, no backend)
+  const form = document.getElementById('contactForm');
+  const formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const message = document.getElementById('message');
+    const nameErr = document.getElementById('nameErr');
+    const emailErr = document.getElementById('emailErr');
+    const messageErr = document.getElementById('messageErr');
+    nameErr.textContent = ''; emailErr.textContent = ''; messageErr.textContent = ''; formMsg.textContent = '';
+
+    let valid = true;
+    if (!name.value.trim()) { nameErr.textContent = 'Please enter your name.'; valid = false; }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.value.trim())) { emailErr.textContent = 'Please enter a valid email.'; valid = false; }
+    if (!message.value.trim()) { messageErr.textContent = 'Please add a short message.'; valid = false; }
+    if (!valid) return;
+
+    const subject = encodeURIComponent(`Portfolio contact from ${name.value.trim()}`);
+    const body = encodeURIComponent(`${message.value.trim()}\n\n— ${name.value.trim()} (${email.value.trim()})`);
+    window.location.href = `mailto:vsudeee1129@gmail.com?subject=${subject}&body=${body}`;
+    formMsg.textContent = 'Opening your email app with this message pre-filled…';
+  });
+</script>
+
+</body>
+</html>
